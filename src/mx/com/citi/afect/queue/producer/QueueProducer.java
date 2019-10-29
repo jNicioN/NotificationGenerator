@@ -1,6 +1,6 @@
 package mx.com.citi.afect.queue.producer;
 
-import mx.com.citi.afect.conexion.SonicConector;
+import mx.com.citi.afect.connection.SonicConnector;
 
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
@@ -17,10 +17,10 @@ public class QueueProducer {
 	public void sendMessage(String message) {
 
 		MessageProducer sender;
-		SonicConector connector;
+		SonicConnector connector;
 
 		try {
-			connector = new SonicConector();
+			connector = new SonicConnector();
 			connector.getBrockerConnection().start();
 			Session session = connector.getSession();
 			sender = session.createProducer(connector.getQueue());
