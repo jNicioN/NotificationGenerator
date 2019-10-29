@@ -1,4 +1,4 @@
-package mx.com.citi.afect.conexion;
+package mx.com.citi.afect.connection;
 
 import progress.message.jclient.ConnectionFactory;
 
@@ -12,9 +12,9 @@ import java.util.Properties;
 
 import static javax.jms.Session.AUTO_ACKNOWLEDGE;
 
-public class SonicConector {
+public class SonicConnector {
 	private final String broker;
-	private final String sonicUsuario;
+	private final String sonicUser;
 	private final String sonicPassword;
 	private final String queueName;
 	private final String queueIDConexion;
@@ -27,7 +27,7 @@ public class SonicConector {
 	 * @throws JMSException Exception about JMS Messages
 	 * @author Jonathan Nicio
 	 */
-	public SonicConector() throws IOException, JMSException {
+	public SonicConnector() throws IOException, JMSException {
 
 		FileInputStream fis = new FileInputStream("res/connexion.properties");
 
@@ -35,7 +35,7 @@ public class SonicConector {
 		Properties prop = new Properties();
 		prop.load(fis);
 		broker = prop.getProperty("broker");
-		sonicUsuario = prop.getProperty("user");
+		sonicUser = prop.getProperty("user");
 		sonicPassword = prop.getProperty("password");
 		queueName = prop.getProperty("queue");
 		queueIDConexion = prop.getProperty("queue.id");
@@ -56,7 +56,7 @@ public class SonicConector {
 		System.out.println("Intentando iniciar sesión con Sonic ...");
 
 		ConnectionFactory conFac = new progress.message.jclient.ConnectionFactory(broker, queueIDConexion);
-		connection = conFac.createConnection(sonicUsuario, sonicPassword);
+		connection = conFac.createConnection(sonicUser, sonicPassword);
 		session = connection.createSession(false, AUTO_ACKNOWLEDGE);
 		queue = session.createQueue(queueName);
 
