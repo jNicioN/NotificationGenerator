@@ -17,7 +17,7 @@ public class SonicConnector {
 	private final String sonicUser;
 	private final String sonicPassword;
 	private final String queueName;
-	private final String queueIDConexion;
+	private final String queueIDConnection;
 	private Queue queue;
 	private Connection connection;
 	private Session session;
@@ -29,7 +29,7 @@ public class SonicConnector {
 	 */
 	public SonicConnector() throws IOException, JMSException {
 
-		FileInputStream fis = new FileInputStream("res/connexion.properties");
+		FileInputStream fis = new FileInputStream("res/connection.properties");
 
 		// Properties of Broker
 		Properties prop = new Properties();
@@ -38,7 +38,7 @@ public class SonicConnector {
 		sonicUser = prop.getProperty("user");
 		sonicPassword = prop.getProperty("password");
 		queueName = prop.getProperty("queue");
-		queueIDConexion = prop.getProperty("queue.id");
+		queueIDConnection = prop.getProperty("queue.id");
 
 		fis.close();
 
@@ -55,10 +55,12 @@ public class SonicConnector {
 
 		System.out.println("Intentando iniciar sesión con Sonic ...");
 
-		ConnectionFactory conFac = new progress.message.jclient.ConnectionFactory(broker, queueIDConexion);
+		ConnectionFactory conFac = new progress.message.jclient.ConnectionFactory(broker, queueIDConnection);
 		connection = conFac.createConnection(sonicUser, sonicPassword);
 		session = connection.createSession(false, AUTO_ACKNOWLEDGE);
 		queue = session.createQueue(queueName);
+
+
 
 		System.out.println("Sesión iniciada");
 	}
