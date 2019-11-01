@@ -12,8 +12,9 @@ public class MessageGenerator {
 		datos.setTypeNotif(Integer.parseInt(args[0]));
 		datos.setImei(args[1]);
 		datos.setDelay(args[2]);
+		datos.setNotificationId(args[3]);
 
 		QueueProducer producer = new QueueProducer();
-		producer.sendMessage(datos.getNotification());
+		producer.sendMessage(datos.getNotification(),args[1]);
 	}
 }
