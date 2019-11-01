@@ -8,13 +8,14 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import java.io.IOException;
 
+
 public class QueueProducer {
 
 	/**
-	 * @author Jonathan Nicio
 	 * @param message Message to add to queue
+	 * @author Jonathan Nicio
 	 */
-	public void sendMessage(String message) {
+	public void sendMessage(String message,String imei) {
 
 		MessageProducer sender;
 		SonicConnector connector;
@@ -26,6 +27,9 @@ public class QueueProducer {
 			sender = session.createProducer(connector.getQueue());
 
 			TextMessage tMessage = session.createTextMessage();
+			tMessage.setStringProperty("IMEI", imei);
+
+			System.out.print("Setting imei = "+imei+"\n");
 
 			tMessage.setText(String.valueOf(message));
 
