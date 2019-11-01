@@ -44,7 +44,7 @@ class NotificationSelector {
 				}
 			}
 			notification = sb.toString();
-			System.out.println("Mensaje leido: \n" + notification);
+			System.out.println("Mensaje leido desde: \n" + notFile.getAbsolutePath() + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
